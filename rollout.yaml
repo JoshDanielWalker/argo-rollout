@@ -35,3 +35,28 @@ spec:
           requests:
             memory: 32Mi
             cpu: 5m
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: guestbook
+  labels:
+    app: guestbook
+spec:
+  strategy:
+    canary: 
+      steps:
+      - experiment:
+          duration: 1h
+          templates:
+          - name: purple
+            specRef: stable
+          - name: orange
+            specRef: canary
+          analyses:
+          - name: purple
+            templateName: http-benchmark
+            args: [{name: host, value: purple}]
+          - name: orange
+            templateName: http-benchmark
+            args: [{name: host, value: orange}]
