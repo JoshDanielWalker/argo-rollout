@@ -57,6 +57,3 @@ spec:
   - name: purple
     templateName: http-benchmark
     args: [{name: host, value: purple}]
-  - name: orange
-    templateName: http-benchmark
-    args: [{name: host, value: orange}]
