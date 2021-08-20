@@ -29,29 +29,6 @@ spec:
           - name: http
             containerPort: 8080
             protocol: TCP
-  - name: orange
-    minReadySeconds: 10
-    replicas: 2
-    selector:
-      matchLabels:
-        app: experiment-demo
-        color: orange
-    template:
-      metadata:
-        labels:
-          app: experiment-demo
-          color: orange
-      spec:
-        containers:
-        - name: rollouts-demo
-          # Note that this is intentionally using a "bad" version of the image, the bad image has a
-          # high error rate, which will cause the experiment to fail prematurely
-          image: argoproj/rollouts-demo:bad-orange
-          imagePullPolicy: Always
-          ports:
-          - name: http
-            containerPort: 8080
-            protocol: TCP
 
   analyses:
   - name: purple
